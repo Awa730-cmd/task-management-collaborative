@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Inscription · Taskspace{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div>
+        <p class="eyebrow">Rejoindre Taskspace</p>
+        <h1>Inscription</h1>
+        <p class="intro">Créez votre compte utilisateur.</p>
+    </div>
+</div>
+<div class="detail-grid">
+    <section class="panel">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" style="margin-top: 1rem; padding: 0.55rem 1.1rem; background: var(--accent); color: white; border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">S'inscrire</button>
+        </form>
+        <p style="margin-top: 1rem;">Déjà inscrit ? <a href="{% url 'login' %}">Se connecter</a></p>
+    </section>
+</div>
+{% endblock %}

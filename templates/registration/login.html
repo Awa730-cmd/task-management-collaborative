@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Connexion · Taskspace{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div>
+        <p class="eyebrow">Accès sécurisé</p>
+        <h1>Connexion</h1>
+        <p class="intro">Connectez-vous pour accéder à vos listes de tâches.</p>
+    </div>
+</div>
+<div class="detail-grid">
+    <section class="panel">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" style="margin-top: 1rem; padding: 0.55rem 1.1rem; background: var(--accent); color: white; border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">Se connecter</button>
+        </form>
+        <p style="margin-top: 1rem;">Pas encore de compte ? <a href="{% url 'signup' %}">Créer un compte</a></p>
+    </section>
+</div>
+{% endblock %}

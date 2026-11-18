@@ -1,0 +1,48 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Task lists{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">✓</span> Taskspace</div>
+      <p class="sidebar-label">Workspace</p>
+      <nav class="side-nav" aria-label="Main">
+    <a href="{% url 'dashboard' %}" style="text-decoration: none;">
+        <span class="{% if request.resolver_match.url_name == 'dashboard' %}nav-current{% endif %}">Vue d'ensemble</span>
+    </a>
+</nav>
+      <div class="sidebar-note">
+        <strong>Team space</strong>
+        <p>Task lists, assignments, and discussion will appear here.</p>
+      </div>
+    </aside>
+
+    <div class="main-column">
+      <header class="topbar">
+        <span class="workspace-name">Collaborative task management</span>
+        <span class="user-placeholder">
+    {% if user.is_authenticated %}
+        <strong>{{ user.username }}</strong> · 
+        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" style="background:none; border:none; color:var(--accent); cursor:pointer; text-decoration:underline; font:inherit; padding:0;">Déconnexion</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Connexion</a> · <a href="{% url 'signup' %}">Inscription</a>
+    {% endif %}
+</span>
+      </header>
+      <main id="main-content" class="content">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+</body>
+</html>
